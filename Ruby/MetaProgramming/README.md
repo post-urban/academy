@@ -74,4 +74,26 @@ Alphabet.new.z
 関数の処理内容はブロックで指定する。
 
 ```ruby
+class Alphabet
+
+  private
+
+  def method_missing(name, *args)
+    if (:a..:z).include?(name)
+      puts "#{name} from method_missing"
+      return
+    end
+
+    super
+  end
+ end
+
+ Alphabet.new.a
+ # => a from define_method
+ 
+ Alphabet.new.b
+ # => b from define_method
+ 
+ Alphabet.new.z
+ # => z from define_method
 ```
